@@ -3,9 +3,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# -----------------------------------------
-# Original Multihead Latent Attention Module
-# -----------------------------------------
+# ----------------------------------------------
+# Multihead Latent Attention Module
+# Coded By :- Khushwant Sanwalot on (25-02-2025)
+# ----------------------------------------------
 class MultiheadLatentAttention(nn.Module):
     """
     A multi-head latent attention implementation using standard PyTorch ops.
