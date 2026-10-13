@@ -58,6 +58,9 @@ def fused_attention_kernel(
 
         # Compute scores: (BLOCK_M, d) dot (d, BLOCK_N) -> (BLOCK_M, BLOCK_N)
         scores = tl.dot(Q_tile, K_tile, allow_tf32=False) * scale
+        # Out-of-range keys (when S is not a multiple of BLOCK_N) were loaded as zeros;
+        # exclude them from the softmax instead of letting them contribute exp(0 - max).
+        scores = tl.where(n_indices[None, :] < S, scores, float("-inf"))
 
         # Compute the maximum score in the current tile for each query.
         block_max = tl.max(scores, axis=1)  # shape: (BLOCK_M,)

@@ -1,1 +1,13 @@
 __pycache__
+
+# Python / tooling
+*.pyc
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# Extension build output
+build/
+*.egg-info/
+*.so
